@@ -617,7 +617,8 @@ class Displacements(Transform):
     type: Literal["displacements"] = "displacements"
     path: str = Field(..., description="Path to the Zarr array displacement field.")
     interpolation: str | None = Field(
-        default=None, description="Interpolation method to be used after applying the transform."
+        default=None,
+        description="Interpolation method to be used after applying the transform.",
     )
 
     @property
@@ -650,7 +651,7 @@ class Coordinates(Transform):
     )
     interpolation: str | None = Field(
         default=None,
-        description="Interpolation method to be used after applying the transform."
+        description="Interpolation method to be used after applying the transform.",
     )
 
     @property
@@ -710,9 +711,18 @@ class Bijection(Transform):
 
 
 class ByDimensionTransform(BaseAttrs):
-    transformation: "AnyTransform" = Field(..., description="Transformation.")
-    input_axes: tuple[int, ...] = Field(..., description="Input axis indices.")
-    output_axes: tuple[int, ...] = Field(..., description="Output axis indices.")
+    """
+    A transformation item within a byDimension coordinate transformation.
+
+    As well as the actual transform, this specifies which
+    axes it operates on via the input_axes and output_axes fields.
+    """
+
+    transformation: "AnyTransform" = Field(
+        ..., description="The coordinate transformation."
+    )
+    input_axes: tuple[int, ...] = Field(..., description="Input axes indices.")
+    output_axes: tuple[int, ...] = Field(..., description="Output axes indices.")
 
 
 class ByDimension(Transform):
@@ -753,3 +763,6 @@ AnyTransform = Annotated[
     | ByDimension,
     Field(discriminator="type"),
 ]
+
+# Rebuild models to resolve forward references
+ByDimensionTransform.model_rebuild()
