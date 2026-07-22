@@ -291,7 +291,7 @@ def test_project_axis_both_none() -> None:
         ValidationError,
         match=re.escape(
             "At least one of 'createdOutputs' or 'droppedInputs' must be set."
-            ),
+        ),
     ):
         ProjectAxis()
 
@@ -308,4 +308,3 @@ def test_project_axis_dropped_inputs_only() -> None:
     pa = ProjectAxis(droppedInputs=(2,))
     assert pa.droppedInputs == (2,)
     assert pa.createdOutputs is None
-

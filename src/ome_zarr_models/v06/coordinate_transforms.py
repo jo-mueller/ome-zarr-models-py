@@ -816,7 +816,7 @@ class ProjectAxis(Transform):
     @classmethod
     def _created_outputs_unique(
         cls, createdOutputs: tuple[int, ...] | None
-        ) -> tuple[int, ...] | None:
+    ) -> tuple[int, ...] | None:
         """
         Ensures that the positions in createdOutputs are unique.
         """
@@ -828,7 +828,7 @@ class ProjectAxis(Transform):
     @classmethod
     def _dropped_inputs_unique(
         cls, droppedInputs: tuple[int, ...] | None
-        ) -> tuple[int, ...] | None:
+    ) -> tuple[int, ...] | None:
         """
         Ensures that the positions in droppedInputs are unique.
         """
@@ -844,7 +844,7 @@ class ProjectAxis(Transform):
         if self.createdOutputs is None and self.droppedInputs is None:
             raise ValueError(
                 "At least one of 'createdOutputs' or 'droppedInputs' must be set."
-                )
+            )
         return self
 
     @property
