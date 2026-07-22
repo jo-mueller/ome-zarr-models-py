@@ -799,18 +799,27 @@ class ProjectAxis(Transform):
     """
 
     type: Literal["projectAxis"] = "projectAxis"
-    createdOutputs: tuple[int, ...] = Field(
-        ...,
+    createdOutputs: tuple[int, ...] | None = Field(
+        default=None,
         min_length=1,
         max_length=3,
         description="Positions at which to insert zeros in coordinate vector",
     )
-    droppedInputs: tuple[int, ...] = Field(
-        ...,
+    droppedInputs: tuple[int, ...] | None = Field(
+        default=None,
         min_length=1,
         max_length=3,
         description="Array of positions at which to drop dimensions.",
     )
+
+    @model_validator(mode="after")
+    def _ensure_either_created_or_dropped(self: Self) -> Self:
+        """
+        Ensures that at least one of createdOutputs or droppedInputs is given.
+        """
+        if self.createdOutputs is None and self.droppedInputs is None:
+            raise ValueError("At least one of 'createdOutputs' or 'droppedInputs' must be set.")
+        return self
 
     @property
     def has_inverse(self) -> bool:
