@@ -289,9 +289,11 @@ def test_project_axis_both_none() -> None:
     """Test that ProjectAxis raises an error when both fields are None."""
     with pytest.raises(
         ValidationError,
-        match=re.escape("At least one of 'createdOutputs' or 'droppedInputs' must be set."),
+        match=re.escape(
+            "At least one of 'createdOutputs' or 'droppedInputs' must be set."
+            ),
     ):
-        ProjectAxis()  # type: ignore[call-arg]
+        ProjectAxis()
 
 
 def test_project_axis_created_outputs_only() -> None:

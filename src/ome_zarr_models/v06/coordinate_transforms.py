@@ -814,7 +814,9 @@ class ProjectAxis(Transform):
 
     @field_validator("createdOutputs", mode="after")
     @classmethod
-    def _ensure_unique_created_outputs(cls, createdOutputs: tuple[int, ...] | None) -> tuple[int, ...] | None:
+    def _created_outputs_unique(
+        cls, createdOutputs: tuple[int, ...] | None
+        ) -> tuple[int, ...] | None:
         """
         Ensures that the positions in createdOutputs are unique.
         """
@@ -824,7 +826,9 @@ class ProjectAxis(Transform):
 
     @field_validator("droppedInputs", mode="after")
     @classmethod
-    def _ensure_unique_dropped_inputs(cls, droppedInputs: tuple[int, ...] | None) -> tuple[int, ...] | None:
+    def _dropped_inputs_unique(
+        cls, droppedInputs: tuple[int, ...] | None
+        ) -> tuple[int, ...] | None:
         """
         Ensures that the positions in droppedInputs are unique.
         """
@@ -838,7 +842,9 @@ class ProjectAxis(Transform):
         Ensures that at least one of createdOutputs or droppedInputs is given.
         """
         if self.createdOutputs is None and self.droppedInputs is None:
-            raise ValueError("At least one of 'createdOutputs' or 'droppedInputs' must be set.")
+            raise ValueError(
+                "At least one of 'createdOutputs' or 'droppedInputs' must be set."
+                )
         return self
 
     @property
