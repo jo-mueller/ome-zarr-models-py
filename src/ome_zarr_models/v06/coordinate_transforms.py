@@ -812,6 +812,26 @@ class ProjectAxis(Transform):
         description="Array of positions at which to drop dimensions.",
     )
 
+    @field_validator("createdOutputs", mode="after")
+    @classmethod
+    def _ensure_unique_created_outputs(cls, createdOutputs: tuple[int, ...] | None) -> tuple[int, ...] | None:
+        """
+        Ensures that the positions in createdOutputs are unique.
+        """
+        if createdOutputs is not None:
+            unique_items_validator(list(createdOutputs))
+        return createdOutputs
+
+    @field_validator("droppedInputs", mode="after")
+    @classmethod
+    def _ensure_unique_dropped_inputs(cls, droppedInputs: tuple[int, ...] | None) -> tuple[int, ...] | None:
+        """
+        Ensures that the positions in droppedInputs are unique.
+        """
+        if droppedInputs is not None:
+            unique_items_validator(list(droppedInputs))
+        return droppedInputs
+
     @model_validator(mode="after")
     def _ensure_either_created_or_dropped(self: Self) -> Self:
         """
