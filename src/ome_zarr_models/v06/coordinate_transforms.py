@@ -790,9 +790,49 @@ class ByDimension(Transform):
         raise NoAffineError
 
 
+class ProjectAxis(Transform):
+    """
+    ProjectAxis transformation projects coordinates between different dimensionalities.
+
+    Projects input coordinates from N dimensions to M dimensions by adding or
+    dropping dimensions at specified indices of the coordinate vector.
+    """
+
+    type: Literal["projectAxis"] = "projectAxis"
+    createdOutputs: tuple[int, ...] = Field(
+        ...,
+        min_length=1,
+        max_length=3,
+        description="Positions at which to insert zeros in coordinate vector",
+    )
+    droppedInputs: tuple[int, ...] = Field(
+        ...,
+        min_length=1,
+        max_length=3,
+        description="Array of positions at which to drop dimensions.",
+    )
+
+    @property
+    def has_inverse(self) -> bool:
+        raise NotImplementedError
+
+    def get_inverse(self) -> ProjectAxis:
+        raise NotImplementedError
+
+    def transform_point(self, point: typing.Sequence[float]) -> tuple[float, ...]:
+        raise NotImplementedError
+
+    def as_affine(self) -> Affine:
+        raise NoAffineError(
+            "ProjectAxis transformation cannot be converted to affine: "
+            "it changes dimensionality."
+        )
+
+
 AnyTransform = Annotated[
     Identity
     | MapAxis
+    | ProjectAxis
     | Translation
     | Scale
     | Affine
