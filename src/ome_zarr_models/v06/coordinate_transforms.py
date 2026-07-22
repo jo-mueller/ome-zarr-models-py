@@ -799,18 +799,53 @@ class ProjectAxis(Transform):
     """
 
     type: Literal["projectAxis"] = "projectAxis"
-    createdOutputs: tuple[int, ...] = Field(
-        ...,
+    createdOutputs: tuple[int, ...] | None = Field(
+        default=None,
         min_length=1,
         max_length=3,
         description="Positions at which to insert zeros in coordinate vector",
     )
-    droppedInputs: tuple[int, ...] = Field(
-        ...,
+    droppedInputs: tuple[int, ...] | None = Field(
+        default=None,
         min_length=1,
         max_length=3,
         description="Array of positions at which to drop dimensions.",
     )
+
+    @field_validator("createdOutputs", mode="after")
+    @classmethod
+    def _created_outputs_unique(
+        cls, createdOutputs: tuple[int, ...] | None
+    ) -> tuple[int, ...] | None:
+        """
+        Ensures that the positions in createdOutputs are unique.
+        """
+        if createdOutputs is not None:
+            unique_items_validator(list(createdOutputs))
+        return createdOutputs
+
+    @field_validator("droppedInputs", mode="after")
+    @classmethod
+    def _dropped_inputs_unique(
+        cls, droppedInputs: tuple[int, ...] | None
+    ) -> tuple[int, ...] | None:
+        """
+        Ensures that the positions in droppedInputs are unique.
+        """
+        if droppedInputs is not None:
+            unique_items_validator(list(droppedInputs))
+        return droppedInputs
+
+    @model_validator(mode="after")
+    def _ensure_either_created_or_dropped(self: Self) -> Self:
+        """
+        Ensures that at least one of createdOutputs or droppedInputs is given.
+        """
+        if self.createdOutputs is None and self.droppedInputs is None:
+            raise ValueError(
+                "At least one of 'createdOutputs' or 'droppedInputs' must be set."
+            )
+        return self
 
     @property
     def has_inverse(self) -> bool:
