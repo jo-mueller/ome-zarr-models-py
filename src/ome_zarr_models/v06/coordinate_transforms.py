@@ -802,7 +802,7 @@ class ProjectAxis(Transform):
         ...,
         min_length=1,
         max_length=3,
-        description="Array of positions at which to insert new dimensions (zero-valued).",
+        description="Positions at which to insert zeros in coordinate vector",
     )
     droppedInputs: tuple[int, ...] = Field(
         ...,
