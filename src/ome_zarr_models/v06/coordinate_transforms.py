@@ -789,6 +789,7 @@ class ByDimension(Transform):
         #  implement this
         raise NoAffineError
 
+
 class ProjectAxis(Transform):
     """
     ProjectAxis transformation projects coordinates between different dimensionalities.
