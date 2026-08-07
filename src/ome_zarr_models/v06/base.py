@@ -19,21 +19,20 @@ class BaseOMEAttrs(BaseAttrsv3):
     Base class for OME-Zarr 0.6 attributes.
     """
 
-    # TODO: change this to 0.6 before final release!
-    version: Literal["0.6.dev4"]
+    version: Literal["0.6"]
 
     @field_validator("version", mode="before")
     @classmethod
-    def _parse_version(cls, version: str) -> Literal["0.6.dev4"]:
-        if version == "0.6.dev4":
-            return "0.6.dev4"
-        elif version == "0.6":
+    def _parse_version(cls, version: str) -> Literal["0.6"]:
+        if version == "0.6":
+            return "0.6"
+        elif version == "0.6.dev4":
             warnings.warn(
-                "Version number is '0.6', converting to '0.6.dev4'",
+                "Version number is '0.6.dev4', converting to '0.6'",
                 ValidationWarning,
                 stacklevel=2,
             )
-            return "0.6.dev4"
+            return "0.6"
         raise ValueError(f"Invalid version: '{version}'. Must be '0.6' or '0.6.dev4'.")
 
 

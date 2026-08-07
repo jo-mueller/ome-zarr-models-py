@@ -158,7 +158,7 @@ class Image(BaseGroupv06[ImageAttrs]):
                     multiscales=[
                         multimeta,
                     ],
-                    version="0.6.dev4",
+                    version="0.6",
                 )
             ),
         )

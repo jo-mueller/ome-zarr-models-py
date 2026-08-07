@@ -502,7 +502,7 @@ def test_from_zarr_missing_array(store: Store) -> None:
     Test that creating a multiscale Group fails when an expected Zarr array is missing
     or is a group instead of an array
     """
-    arrays = np.zeros((10, 10)), np.zeros((5, 5))
+    arrays = np.zeros((10, 10), dtype="uint8"), np.zeros((5, 5), dtype="uint8")
     group_path = "broken"
     arrays_names = ("s0", "s1")
     group_model = Image.new(
@@ -529,7 +529,7 @@ def test_from_zarr_ectopic_group(store: Store) -> None:
     Test that creating a multiscale Group fails when an expected Zarr array is missing
     or is a group instead of an array
     """
-    arrays = np.zeros((10, 10)), np.zeros((5, 5))
+    arrays = np.zeros((10, 10), dtype="uint8"), np.zeros((5, 5), dtype="uint8")
     group_path = "broken"
     arrays_names = ("s0", "s1")
     group_model = Image.new(
