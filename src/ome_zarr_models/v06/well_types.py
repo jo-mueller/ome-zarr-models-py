@@ -37,6 +37,6 @@ class WellMeta(CommonWellMeta):
     images: Annotated[list[WellImage], AfterValidator(unique_items_validator)] = Field(  # type: ignore[assignment]
         ..., description="Images within a well"
     )
-    version: Literal["0.6.dev4"] | None = Field(
+    version: Literal["0.6"] | None = Field(
         None, description="Version of the well specification"
     )

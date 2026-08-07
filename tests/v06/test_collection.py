@@ -28,7 +28,7 @@ def test_load_container() -> None:
             node_type="group",
             attributes={
                 "ome": {
-                    "version": "0.6.dev4",
+                    "version": "0.6",
                     "multiscales": [
                         {
                             "coordinateSystems": (
@@ -110,7 +110,7 @@ def test_load_container() -> None:
             node_type="group",
             attributes={
                 "ome": {
-                    "version": "0.6.dev4",
+                    "version": "0.6",
                     "multiscales": [
                         {
                             "coordinateSystems": (
@@ -189,7 +189,7 @@ def test_load_container() -> None:
         ),
     }
     assert container.ome_attributes == BaseSceneAttrs(
-        version="0.6.dev4",
+        version="0.6",
         scene=SceneAttrs(
             coordinateTransformations=(
                 Translation(
@@ -356,4 +356,4 @@ def test_scene_new() -> None:
     assert scene.ome_attributes.scene.coordinateSystems[0].name == "world"
 
     # Verify version
-    assert scene.ome_attributes.version == "0.6.dev4"
+    assert scene.ome_attributes.version == "0.6"

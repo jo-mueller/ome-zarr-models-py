@@ -274,7 +274,7 @@ def test_image_convert_v06() -> None:
 
     attrs_v06 = ome_group.ome_attributes.to_version("0.6")
     assert attrs_v06 == ImageAttrsV06(
-        version="0.6.dev4",
+        version="0.6",
         multiscales=[
             MultiscaleV06(
                 coordinateSystems=(

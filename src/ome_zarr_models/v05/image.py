@@ -91,7 +91,7 @@ class ImageAttrs(BaseOMEAttrs):
         from ome_zarr_models.v06.image import ImageAttrs as ImageAttrsV06
 
         return ImageAttrsV06(
-            version="0.6.dev4",
+            version="0.6",
             multiscales=[
                 m.to_version(
                     "0.6",

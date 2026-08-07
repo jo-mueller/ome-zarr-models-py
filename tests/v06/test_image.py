@@ -37,7 +37,7 @@ def test_image(store: Store) -> None:
     )
     ome_group = Image.from_zarr(zarr_group)
     image_attrs = ImageAttrs(
-        version="0.6.dev4",
+        version="0.6",
         multiscales=[
             Multiscale(
                 coordinateSystems=(
@@ -254,7 +254,7 @@ def test_image_new() -> None:
         ),
     }
     assert image.ome_attributes == ImageAttrs(
-        version="0.6.dev4",
+        version="0.6",
         multiscales=[
             Multiscale(
                 coordinateSystems=(
