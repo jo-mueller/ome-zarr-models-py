@@ -78,7 +78,7 @@ plt.imshow(zarr_arr, cmap="gray")
 array_specs: list[AnyArraySpec] = [
     ArraySpec(
         shape=(100, 100),
-        data_type=np.uint16,
+        data_type=np.uint8,
         chunk_grid=NamedConfig(
             name="regular",
             configuration={"chunk_shape": [32, 32]},
@@ -93,7 +93,7 @@ array_specs: list[AnyArraySpec] = [
     ),
     ArraySpec(
         shape=(100, 100),
-        data_type=np.uint16,
+        data_type=np.uint8,
         chunk_grid=NamedConfig(
             name="regular",
             configuration={"chunk_shape": [32, 32]},
