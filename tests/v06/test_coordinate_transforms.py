@@ -107,13 +107,13 @@ def test_inverse(transform: Transform, inverse_expected: Transform) -> None:
                 transformations=(
                     ByDimensionTransform(
                         transformation=Scale(scale=(4,)),
-                        input_axes=(2,),
-                        output_axes=(1,),
+                        inputAxes=(2,),
+                        outputAxes=(1,),
                     ),
                     ByDimensionTransform(
                         transformation=Translation(translation=(0.1, 0.3)),
-                        input_axes=(1, 0),
-                        output_axes=(0, 2),
+                        inputAxes=(1, 0),
+                        outputAxes=(0, 2),
                     ),
                 )
             ),
@@ -142,13 +142,13 @@ def test_transform_point(
                 transformations=(
                     ByDimensionTransform(
                         transformation=Scale(scale=(4,)),
-                        input_axes=(2,),
-                        output_axes=(1,),
+                        inputAxes=(2,),
+                        outputAxes=(1,),
                     ),
                     ByDimensionTransform(
                         transformation=Translation(translation=(0.1, 0.3)),
-                        input_axes=(1, 0),
-                        output_axes=(0, 2),
+                        inputAxes=(1, 0),
+                        outputAxes=(0, 2),
                     ),
                 )
             ),
